@@ -90,14 +90,14 @@ int main() {
             });
         }
 
-        if (!gpio_get(6)) { // 9-GP6 : F1 / ultimate
-            CommunicationProtocols::Joybus::enterMode(gcDataPin, [](){
-                return DACAlgorithms::UltimateF1::getGCReport(GpioToButtonSets::F1::defaultConversion());
-            });
+        if (!gpio_get(6)) { // 9-GP6 : F1 / Melee
+            CommunicationProtocols::Joybus::enterMode(gcDataPin, [](){ return DACAlgorithms::MeleeF1::getGCReport(GpioToButtonSets::F1::defaultConversion()); });
         }
         
-        // Else: F1 / Melee
-        CommunicationProtocols::Joybus::enterMode(gcDataPin, [](){ return DACAlgorithms::MeleeF1::getGCReport(GpioToButtonSets::F1::defaultConversion()); });
+        // Else: F1 / Ultimate
+        CommunicationProtocols::Joybus::enterMode(gcDataPin, [](){
+                return DACAlgorithms::UltimateF1::getGCReport(GpioToButtonSets::F1::defaultConversion());
+            });
     }
 
     // Else:
@@ -137,7 +137,7 @@ int main() {
         USBConfigurations::GccToUsbAdapter::actuateReportFromGCState(DACAlgorithms::ProjectPlusF1::getGCReport(GpioToButtonSets::F1::defaultConversion()));
     });
 
-    // 9 - GP6 - MX : F1 / ultimate / adapter
+    // 9 - GP6 - MX : Old Default: F1 / ultimate / adapter
     if (!gpio_get(6)) USBConfigurations::GccToUsbAdapter::enterMode([](){
         USBConfigurations::GccToUsbAdapter::actuateReportFromGCState(DACAlgorithms::UltimateF1::getGCReport(GpioToButtonSets::F1::defaultConversion()));
     });
