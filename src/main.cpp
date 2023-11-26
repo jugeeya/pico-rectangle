@@ -161,5 +161,5 @@ int main() {
     // Default: F1 / ultimate / adapter
     USBConfigurations::GccToUsbAdapter::enterMode([](){
         USBConfigurations::GccToUsbAdapter::actuateReportFromGCState(DACAlgorithms::UltimateF1::getGCReport(GpioToButtonSets::F1::defaultConversion()));
-    });
+    }); 
 }
