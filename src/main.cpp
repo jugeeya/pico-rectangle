@@ -97,7 +97,7 @@ int main() {
         // Else: F1 / Ultimate
         CommunicationProtocols::Joybus::enterMode(gcDataPin, [](){
                 return DACAlgorithms::UltimateF1::getGCReport(GpioToButtonSets::F1::defaultConversion());
-            });
+        });
     }
 
     // Else:
